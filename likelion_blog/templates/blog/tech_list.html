@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %} {% block title %}Tech · {{ BRAND_NAME }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/tech_list.css' %}"> 
+{% endblock %}
+
+{% block content %}
+<div class="main">
+    <div class="inner">
+        <div class="header-row">
+            <div class="title-stack">
+                <span class="mono-eyebrow">{{page_eyebrow}}</span>
+                <h1 class="heading-h1">{{page_h1}}</h1>
+            </div>
+            <div class="search-bar">
+                <div class="body-small">⌕</div>
+                <input type="text" class="body-small" placeholder="search posts…">
+                <div class="kbd">
+                    <span class="mono-kbd">⌘K</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-filter">
+            <div class="chip-1">
+                <div class="label-chip">All</div>
+            </div>
+            {% for category in categories %}
+            <div class="chip-2">
+                <div class="label-chip">{{category.label}}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="post-list">
+            {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}" class="post-row" style="text-decoration: none; color: inherit;">
+                <div class="mono-meta">{{post.published_at}}</div>
+                <div class="content-col">
+                    <h2 class="heading-h4">{{post.title}}</h2>
+                    <div class="body-small">{{post.subtitle}}</div>
+                    <div class="tag-row">
+                        <div class="chip-1">
+                            <div class="label-chip">{{post.category.label}}</div>
+                        </div>
+                        {% for tag in post.tags.all %}
+                        <div class="chip-2">
+                            <div class="label-chip">{{tag.label}}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="mono-meta">{{post.read_miniutes}} min</div>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="retangle"></div>
+    </div>
+</div>
+{% endblock %}

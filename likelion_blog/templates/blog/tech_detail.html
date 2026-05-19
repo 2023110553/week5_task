@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% load static %}{% block title %}{{ post.title }} · {{ BRAND_NAME }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/tech_detail.css' %}"> 
+{% endblock %}
+{% block content %}
+<div class="main">
+    
+    <div class="toc-list">
+        <div class="mono-eyebrow">ON THIS PAGE</div>
+        <div class="items">
+            <div class="toc-item">
+                <div class="body-small-meta">1. 토큰이란</div>
+            </div>
+            <div class="toc-item">
+                <div class="body-small-meta">2. 단위 결정</div>
+            </div>
+            <div class="toc-item">
+                <div class="body-small-meta">3. 빌드 파이프라인</div>
+            </div>
+            <div class="toc-item">
+                <div class="body-small-meta">4. 마무리</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="meta-top">
+            <div class="chip-1">
+                <div class="label-chip">{{post.category.label}}</div>
+            </div>
+            <div class="mono-meta">{{post.published_at}} · {{post.read_minutes}} min · {{post.series_label}}</div>
+        </div>
+
+        <h1 class="heading-h1-article">{{post.title}}</h1>
+        <div class="body-large">{{post.subtitle}}</div>
+        
+        <div class="note-divider">
+            <div class="line"></div>
+        </div>
+        {% for item in sections %}
+        
+            {% if item.kind == 'p' %}
+                <div class="body-text">{{ item.text }}</div>
+                
+            {% elif item.kind == 'h2' %}
+                <h2 id="{{ item.anchor }}" class="heading-h2-section">{{ item.text }}</h2>
+                
+            {% elif item.kind == 'code' %}
+                <div class="code-block">
+                    <pre><div class="mono-code">{{ item.text }}</div></pre>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div class="note-divider"></div>
+        <div class="heading-h5">comments · 4</div>
+        
+        <div class="sign-in-prompt">
+            <div class="prompt-text">
+                <div class="body-small">댓글을 남기려면 로그인이 필요해요</div>
+                <div class="body-small-meta">Sign in to leave a note on this page.</div>
+            </div>
+            <div class ="button">
+                <div class="body-small-bold">Sign in →</div>
+            </div>
+        </div>
+
+        {% for comment in post.comments.all %}
+        <div class="comment-item">
+            <div class="avatar">
+                <div class="user-name">{{comment.initials}}</div>
+            </div>
+            <div class="body">
+                <div class="header">
+                    <div class="body-small-bold">{{comment.author_name}}</div>
+                    <div class="mono-kbd">{{comment.date_display}}</div>
+                </div>
+                <div class="comment-text">{{comment.body}}</div>
+            </div>
+        </div>
+        {% if not forloop.last %}
+            <div class="note-divider-between-comments">
+                <div class="line"></div>
+            </div>
+        {% endif %}
+        {% endfor %}
+        
+        
+        
+    </div>
+
+    <div class="meta-sidebar">
+        <div class="meta-list">
+            <div class="mono-eyebrow">META</div>
+            <div class="meta-row">
+                <div class="mono-meta">author</div>
+                <div class="mono-meta">아기사자</div>
+            </div>
+            <div class="meta-row">
+                <div class="mono-meta">edited</div>
+                <div class="mono-meta">{{post.edited_at}}</div>
+            </div>
+            <div class="meta-row">
+                <div class="mono-meta">views</div>
+                <div class="mono-meta">{{post.views}}</div>
+            </div>
+            <div class="meta-row">
+                <div class="mono-meta">license</div>
+                <div class="mono-meta">{{post.license}}</div>
+            </div>
+        </div>
+
+        <div class="note-divider">
+            <div class="line"></div>
+        </div>
+        <div class="mono-eyebrow">SHARE</div>
+        <div class="share-group">
+            <div class="chip-2">
+                <div class="label-chip">copy ⎘</div>
+            </div>
+            <div class="chip-2">
+                <div class="label-chip">x</div>
+            </div>
+            <div class="chip-2">
+                <div class="label-chip">rss</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+

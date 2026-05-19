@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block title %}{{ BRAND_NAME }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="inner-1">
+        <div class="text-container12">
+            <p class="mono-eyebrow">{{hero.eyebrow_left}}</p>
+            <p class="mono-meta">{{hero.eyebrow_right}}</p>
+        </div>
+        <h1 class="heading-h1">{{hero.h1_line1}}<br>{{hero.h1_line2}}
+            <span class="accent-dot">.</span></h1>
+        <p class="body-large">
+            {{hero.bio_line1}}<br>
+            {{hero.bio_line2}}
+        </p>
+        <div class="button-container">
+            <div class="button-1">
+                <p class="body-small-bold">최신 글 읽기 →</p>
+            </div>
+            <div class="button-2">
+                <p class="body-small-bold">about</p>
+            </div>
+            <div class="button-2">
+                <p class="body-small-bold">RSS</p>
+            </div>
+        </div>
+        <div class="meta-strip">
+            <div class="text-container8">
+                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
+                    <circle cx="4" cy="4" r="4" fill="#E8794A"/>
+                </svg>
+                <p class="mono-meta">now writing</p>
+                <p class="body-small">{{hero.now_writing}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="today-note">
+    <div class="inner-2">
+        <div class="today-note-header">
+            <div class="frame">
+                <p class="num-text">01</p>
+                <p class="heading-h2-section">오늘의 노트</p>
+            </div>
+            <a class="mono-meta" href="{% url 'tech_list' %}">see all →</a>
+        </div>
+        <div class="note-grid">
+            <a href="{{featured.get_absolute_url}}" class="featured-post">
+                <div class="place-holder-img">
+                    <p class="mono-kbd">{{featured.title}} · cover</p>
+                </div>
+                <div class="content">
+                    <div class="text-container8">
+                        <div class="chip-1">
+                            <div class="label-chip">{{featured.category.label}}</div>
+                        </div>
+                        <div class="chip-2">
+                            <div class="label-chip">{{featured.series_label}}</div>    
+                            </div>
+                        <p class="mono-meta">{{featured.published_at}} · {{featured.read_miniutes}} min</p>
+                    </div>
+                    <p class="heading-h2">{{featured.title}}</p>
+                    <p class="body-small">{{featured.subtitle}}</p>
+                    <p class="mono-meta">이어 읽기 →</p>
+                </div>
+            </a>
+
+            <div class="latest-list">
+                <p class="mono-eyebrow">LATEST · 최근 5편</p>
+                {% for other in others %}
+                <a href ="{{other.get_absolute_url}}" class="post-mini">
+                    <div class="text-container8">
+                        <div class="chip-1">
+                            <div class="label-chip">{{other.category.label}}</div>
+                        </div>
+                        <p class="mono-meta">{{other.published_at}}</p>
+                    </div>
+                    <p class="body-small-bold">{{other.title}}</p>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
