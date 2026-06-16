@@ -1,13 +1,13 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* 패딩이 너비를 늘리지 않게 함 */
+    box-sizing: border-box; 
 }
 
 .main {
-    display: flex;          /* 나 Flexbox 쓸 거야! */
-    flex-direction: row;    /* 가로(행) 방향으로 배치할 거야! (기본값이지만 명시) */
-    justify-content: center; /* 가운데로 모여! */
+    display: flex;          
+    flex-direction: row;    
+    justify-content: center; 
     align-items: flex-start;
     gap: 48px;
     padding: 64px;
@@ -249,6 +249,8 @@ align-items: flex-start;
 gap: 8px;
 border-radius: 8px;
 background: var(--beige-accent-default, #E8794A);
+border: none;
+transition: background-color 150ms ease-out, transform 80ms ease-out;
 }
 
 .comment-item{
@@ -393,6 +395,10 @@ background: var(--beige-accent-hover, #C95A2C);
    transform: scale(0.98);
 }
 
+.button:disabled {
+    opacity: 0.4;            
+}
+
 .items .toc-item:first-child .body-small-meta {
     color: var(--beige-accent-hover, #C95A2C);
 /* Body/Small Meta */
@@ -436,4 +442,48 @@ line-height: 160%; /* 22.4px */
 .heading-h2-section::before {
     content: counter(h2-counter) ". "; /* "1. ", "2. " 형태로 출력 */
     margin-right: 8px; /* 글자와 숫자 사이 간격 */
+}
+
+.comment-editor{
+    display: flex;
+padding: 16px;
+align-items: center;
+gap: 12px;
+align-self: stretch;
+border-radius: 14px;
+border: 1px solid var(--beige-line-default, #D9C7A8);
+background: var(--beige-bg-paper, #FBF6EC);
+}
+
+.text-stack{
+    display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 2px;
+flex: 1 0 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+#comment-input {
+    width: 100%;
+    border: none;             
+    outline: none;           
+    background: transparent; 
+    
+    color: var(--beige-ink-1, #3A2419);
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+}
+
+#comment-input::placeholder {
+    color: var(--beige-ink-3, #8A6A55);
+    
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; 
 }

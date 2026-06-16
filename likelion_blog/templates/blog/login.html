@@ -1,7 +1,65 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}로그인 · {{ BRAND_NAME }}{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}"> 
+{% endblock %}
+
 {% block content %}
-{# TODO: W3 — 아기 사자 작성 영역 #}
+
+    <div class="card">
+        <div class="header">
+            <p class="mono-eyebrow">LOGIN · 로그인</p>
+            <p class="heading-h2">다시 오셨네요.</p>
+            <p class="body-small">Welcome back.Sign in to leave notes and comment</p>
+        </div>
+
+        <div class="note-diver">
+            <div class ="line"></div>
+        </div>
+
+        <form action="{% url 'login' %}" method="post" class="form-field">
+        {% csrf_token %}
+            <div class="text-field">
+                <label for="username" class="mono-eyebrow">ID</label>
+                <input
+                    id="username"
+                    class="input-box"
+                    type="text"
+                    name="username"
+                    placeholder="babyLion"
+                >
+            </div>
+
+            <div class="text-field">
+                <label for="password" class="mono-eyebrow">PASSWORD</label>
+                <input
+                    id="password"
+                    class="input-box"
+                    type="password"
+                    name="password"
+                    placeholder="••••••••"
+                >
+            </div>
+            
+            <div class="forgot-row">
+                <a a href="#" class="body-caption">forgot password?</a>
+            </div>
+            
+            <div class="remember-row">
+                <input class="check-box" type="checkbox" name="remember">
+                <label for="remember"class="body-small-meta">Remember me on this paper</label>
+            </div>
+
+            <button type="submit" class="login-button">
+                <p class="body-small-bold">Sign in →</p>
+            </button>
+        </form>
+        
+        <p class="body-small-meta">처음이신가요? <a href="{% url 'signup' %}" class="signup-link">
+        Create an account</a>
+    </div>
+
 {% endblock %}
